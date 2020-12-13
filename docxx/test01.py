@@ -18,7 +18,7 @@ for paragraph in document.paragraphs:
         kk += 1
         spr = paragraph.text
         s += spr + "\n"
-        if re.search("[0-9]、", s) is not None and "D" in spr:
+        if re.search("[0-9]、", s) is not None and "D、" in spr:
             q.append(s)
             rrra = re.search("（ [A-Z] ）", s)
             if rrra is not None:
@@ -34,7 +34,6 @@ while(1):
         i = int(input("question(1- {kk}):".format(kk=len(mq))))
     elif mode == 2:
         i = randint(1, len(mq))
-        print(i)
     else:
         break
     i -= 1
