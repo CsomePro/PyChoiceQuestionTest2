@@ -27,20 +27,6 @@ for paragraph in document.paragraphs:
                 mq.append(s.replace(rra, "（  ）"))
             s = ""
 
-
-
-
-
-# for i in range(len(mq)):
-#     print(mq[i], end="@")
-#     print(ra[i], end="\n")
-
-# print(q)
-# print(a)
-# print(ra)
-# print(mq)
-# print(re.search("[A-Z]", q[1]).group(0))
-
 mode = int(input("1.you choose\n2.auto rand\n"))
 
 while(1):
@@ -58,7 +44,7 @@ while(1):
     ans = input("answer:")
     if ans in "-1":
         break
-    if ans in ra[i]:
+    if ans.upper() in ra[i]:
         print("right!!")
     else:
         print("wrong")
