@@ -4,7 +4,7 @@ import docx
 import re
 from docx import Document
 
-path = "D:\\Prog\\PY\\docxx\\js01.docx"
+path = r"D:\Prog\PY\docxx\js01.docx"
 document = Document(path)
 kk = 0
 # isp = 0
@@ -55,7 +55,10 @@ while(1):
     if i < 0 or i > len(mq):
         break
     print(mq[i])
-    if input("answer:") in ra[i]:
+    ans = input("answer:")
+    if ans in "-1":
+        break
+    if ans in ra[i]:
         print("right!!")
     else:
         print("wrong")
