@@ -1,10 +1,9 @@
 from random import randint
-
 import docx
 import re
 from docx import Document
 
-path = r"Your Path"
+path = r"js01.docx"
 document = Document(path)
 kk = 0
 # isp = 0
@@ -28,7 +27,9 @@ for paragraph in document.paragraphs:
             s = ""
 
 mode = int(input("1.you choose\n2.auto rand\n"))
-
+op = 0
+ansIndex = 0
+rightIndex = 0
 while(1):
     if mode == 1:
         i = int(input("question(1- {kk}):".format(kk=len(mq))))
@@ -45,8 +46,11 @@ while(1):
         break
     if ans.upper() in ra[i]:
         print("right!!")
+        rightIndex += 1
     else:
         print("wrong")
-    print(ra[i])
+    ansIndex += 1
+    op = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
+    print("正确答案：" + ra[i])
+    print("正确率：{x}%".format(x = op))
 
-#####
