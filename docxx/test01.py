@@ -4,7 +4,7 @@ import docx
 import re
 from docx import Document
 
-path = r"D:\Prog\PY\docxx\js01.docx"
+path = r"Your Path"
 document = Document(path)
 kk = 0
 # isp = 0
@@ -63,4 +63,4 @@ while(1):
     else:
         print("wrong")
     print(ra[i])
-#########
+
