@@ -18,6 +18,8 @@
 
 用法：将mian.py中的 path的值 改为你目标题库的路径（注意：必须是`.docx`后缀的word文档，`.doc`的不支持）
 
+`path = r"你的路径"`
+
 效果展示
 ``` python
 1.you choose the question's index # 自主选题，自测
