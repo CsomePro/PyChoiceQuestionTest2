@@ -1,13 +1,16 @@
 # PyChoiceQuestionTest
 ### 运行环境Python3
-参考此文配置Python3环境\n
+参考此文配置Python3环境
+
 [Python3 环境搭建](https://www.runoob.com/python3/python3-install.html)
 ### 安装python-docx库
 `pip install python-docx`
 ### 使用说明
-主代码位于`docxx/main.py`\n
-用法：将path改为你的路径\n
-效果展示\n
+主代码位于`docxx/main.py`
+
+用法：将path改为你的路径
+
+效果展示
 ``` python
 1.you choose
 2.auto rand
