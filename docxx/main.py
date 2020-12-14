@@ -114,8 +114,8 @@ while (1):
     if i < 0 or i >= len(mq):
         break
     print(mq[i])
-    ans = input("answer:")
-    if ans in "-1":
+    ans = input("answer(input 'quit' to quit):")
+    if ans == "quit":
         break
     if ans.upper() == ra[i]:
         print("right!!")
