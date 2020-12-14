@@ -1,7 +1,7 @@
 from random import randint
-import docx
 import re
 from docx import Document
+import os
 
 path = r"js01.docx"
 document = Document(path)
@@ -26,7 +26,8 @@ for paragraph in document.paragraphs:
                 mq.append(s.replace(rra, "（  ）"))
             s = ""
 
-mode = int(input("1.you choose\n2.auto rand\n"))
+mode = int(input("1.you choose the question's index\n"
+                 "2.auto random question's index\n"))
 op = 0
 ansIndex = 0
 rightIndex = 0
@@ -36,6 +37,7 @@ while(1):
     elif mode == 2:
         i = randint(1, len(mq))
     else:
+        print("Unknown")
         break
     i -= 1
     if i < 0 or i > len(mq):
@@ -53,4 +55,5 @@ while(1):
     op = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
     print("正确答案：" + ra[i])
     print("正确率：{x}%".format(x = op))
-
+    print()
+os.system("pause")
