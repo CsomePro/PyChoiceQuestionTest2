@@ -11,7 +11,7 @@
 
 `pip install python-docx`
 
-[安装教程](https://www.jb51.net/article/1738
+[安装教程](https://www.jb51.net/article/1738)
 
 ### 使用说明
 主代码位于`docxx/main.py`
