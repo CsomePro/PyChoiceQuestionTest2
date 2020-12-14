@@ -18,9 +18,9 @@
 
 效果展示
 ``` python
-1.you choose the question's index
-2.auto random question's index
-3.one by one test from 1 to end
+1.you choose the question's index # 自主选题，自测
+2.auto random question's index # 自动随机选题自测
+3.one by one test from 1 to end # 按顺序从1开始自测
 2
 （多选）24、清王朝与法国签订的条约有（）
 A.《马关条约》B.《中法新约》C.《北京条约》D.《辛丑条约》
