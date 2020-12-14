@@ -6,7 +6,8 @@
 ### 安装python-docx库
 配置完Python3环境后
 
-在Windows命令提示符中输入一下代码，由于安装python-docx库
+在Windows命令提示符中输入下列代码，由于安装python-docx库
+
 `pip install python-docx`
 
 
