@@ -8,6 +8,8 @@
 
 在Windows命令提示符中输入下列代码，由于安装python-docx库
 
+[安装教程](https://www.jb51.net/article/173862.htm)
+
 `pip install python-docx`
 
 
