@@ -95,12 +95,17 @@ isansmq = [0 for i in range(len(mq))]
 
 mode = int(input("1.you choose the question's index\n"
                  "2.auto random question's index\n"
-                 "3.one by one test from 1 to end\n"))
+                 "3.one by one test from x to end\n"))
 op = 0
 ansIndex = 0
 rightIndex = 0
 i = 0
 index = 0
+if mode == 3:
+    index = int(input(f"input x(1-{{indexx}}):".format(indexx=len(mq))))
+    if index < 1 or index > len(mq):
+        print("{indexx} in illegal".format(indexx=index))
+
 # print(len(mq))
 while 1:
     if mode == 1:
