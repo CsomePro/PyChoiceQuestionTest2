@@ -1,19 +1,32 @@
-# PyChoiceQuestionTest
+# PyChoiceQuestionTest 3.0
 ### 运行环境Python3
-#### 安装python-docx库
+参考此文配置Python3环境
+
+[Python3 环境搭建](https://www.runoob.com/python3/python3-install.html)
+### 安装python-docx库
+配置完Python3环境后
+
+在Windows命令提示符中输入下列代码，由于安装python-docx库
+
 `pip install python-docx`
+
+
 ### 使用说明
 主代码位于`docxx/main.py`
-用法：将path改为你的路径
+
+用法：将mian.py中的path改为你目标题库的路径（注意：必须是`.docx`后缀的word文档，`.doc`的不支持）
+
 效果展示
 ``` python
-1.you choose
-2.auto rand
+1.you choose the question's index # 自主选题，自测
+2.auto random question's index # 自动随机选题自测
+3.one by one test from 1 to end # 按顺序从1开始自测
 2
-68、信息化战争作为一种新的战争形态即将登上人类战争的舞台，（  ）是战争形态中最显著和最重要的标志。
-A、作战方式 B、作战思想 C、军队编成 D、主战兵器
+（多选）24、清王朝与法国签订的条约有（）
+A.《马关条约》B.《中法新约》C.《北京条约》D.《辛丑条约》
 
-answer:a
+answer:abc
 wrong
-（ D ）
+正确答案：BC
+正确率：0.0%  0/1
 ```
