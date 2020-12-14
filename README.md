@@ -7,11 +7,11 @@
 配置完Python3环境后
 
 在Windows命令提示符中输入下列代码，由于安装python-docx库
-
-[安装教程](https://www.jb51.net/article/173862.htm)
+62.htm)
 
 `pip install python-docx`
 
+[安装教程](https://www.jb51.net/article/1738
 
 ### 使用说明
 主代码位于`docxx/main.py`
