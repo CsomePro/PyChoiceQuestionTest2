@@ -3,7 +3,7 @@
 #### 安装python-docx库
 `pip install python-docx`
 ### 使用说明
-主代码位于`docxx/test01`
+主代码位于`docxx/main.py`
 用法：将path改为你的路径
 效果展示
 ``` python
