@@ -24,6 +24,7 @@ for paragraph in document.paragraphs:
             rrra = re.search("[A-Z]*[A-Z]", s)
             if rrra is not None:
                 miniment = len(rrra.group(0))
+                if miniment > 1: s += "（多选）" + "\n"
             else:
                 continue
             if re.search("[0-9]、", spr) is not None:
@@ -41,16 +42,16 @@ for paragraph in document.paragraphs:
                 j = 5
                 isp += 1
             if isp >= miniment + j:
-                print(s)
-                print()
+                # print(s)
+                # print()
                 # q.append(s)
                 rrra = re.search("[A-Z]*[A-Z]", s)
                 if rrra is not None:
                     rra = rrra.group(0)
                     ra.append(rra)
                     mq.append(s.replace(rra, "", 1))
-                    print(mq[-1])
-                    print()
+                    # print(mq[-1])
+                    # print()
                 s = ""
                 isp = 0
 
