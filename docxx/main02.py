@@ -91,6 +91,8 @@ for paragraph in document.paragraphs:
 #     print(i)
 #     print("@\n")
 
+isansmq = [0 for i in range(len(mq))]
+
 mode = int(input("1.you choose the question's index\n"
                  "2.auto random question's index\n"
                  "3.one by one test from 1 to end\n"))
@@ -99,11 +101,20 @@ ansIndex = 0
 rightIndex = 0
 i = 0
 index = 0
-while (1):
+# print(len(mq))
+while 1:
     if mode == 1:
-        i = int(input("question(1- {kk}):".format(kk=len(mq))))
+        i = int(input("question(1 - {kk}):".format(kk=len(mq))))
     elif mode == 2:
         i = randint(1, len(mq))
+        # print("i:", end="")
+        # print(i)
+        if ansIndex >= len(mq):
+            break
+        if isansmq[i-1] == 1:
+            continue
+        else:
+            isansmq[i-1] = 1
     elif mode == 3:
         index += 1
         i = index
