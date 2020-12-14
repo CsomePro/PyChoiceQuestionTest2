@@ -1,6 +1,8 @@
 # PyChoiceQuestionTest
 ### 运行环境Python3
-#### 安装python-docx库
+参考此文配置Python3环境
+[Python3](https://www.runoob.com/python3/python3-install.html)
+### 安装python-docx库
 `pip install python-docx`
 ### 使用说明
 主代码位于`docxx/main.py`
