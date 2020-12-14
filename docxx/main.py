@@ -3,7 +3,7 @@ import re
 from docx import Document
 import os
 
-path = r"js01.docx"
+path = r"js02.docx"
 document = Document(path)
 kk = 0
 isp = 0
@@ -12,12 +12,20 @@ mq = []
 # a = []
 ra = []
 s = ""
+miniment = 0
 for paragraph in document.paragraphs:
-    if "1、 " in paragraph.text or kk > 0:
+    j = 4
+    # print(paragraph.text)
+    if "1、" in paragraph.text or kk > 0:
         kk += 1
         spr = paragraph.text
         s += spr + "\n"
         if re.search("[0-9]、", s) is not None:
+            rrra = re.search("[A-Z]*[A-Z]", s)
+            if rrra is not None:
+                miniment = len(rrra.group(0))
+            else:
+                continue
             if re.search("[0-9]、", spr) is not None:
                 s = spr + "\n"
                 isp = 0
@@ -29,15 +37,20 @@ for paragraph in document.paragraphs:
                 isp += 1
             if "D" in spr:
                 isp += 1
-            if isp >= 5:
+            if "E" in spr:
+                j = 5
+                isp += 1
+            if isp >= miniment + j:
                 print(s)
                 print()
-                q.append(s)
-                rrra = re.search("[A-Z]", s)
+                # q.append(s)
+                rrra = re.search("[A-Z]*[A-Z]", s)
                 if rrra is not None:
                     rra = rrra.group(0)
                     ra.append(rra)
                     mq.append(s.replace(rra, "", 1))
+                    print(mq[-1])
+                    print()
                 s = ""
                 isp = 0
 
@@ -49,7 +62,7 @@ ansIndex = 0
 rightIndex = 0
 i = 0
 index = 0
-while(1):
+while (1):
     if mode == 1:
         i = int(input("question(1- {kk}):".format(kk=len(mq))))
     elif mode == 2:
@@ -75,6 +88,6 @@ while(1):
     ansIndex += 1
     op = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
     print("正确答案：" + ra[i])
-    print("正确率：{x}%".format(x = op))
+    print("正确率：{x}%".format(x=op))
     print()
 os.system("pause")
