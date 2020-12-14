@@ -121,14 +121,15 @@ while 1:
         else:
             isansmq[i-1] = 1
     elif mode == 3:
-        index += 1
         i = index
+        index += 1
     else:
         print("Unknown")
         break
     i -= 1
     if i < 0 or i >= len(mq):
         break
+    print("第{ii}题".format(ii=i+1))
     print(mq[i])
     ans = input("answer(input 'quit' to quit):")
     if ans == "quit":
