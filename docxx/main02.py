@@ -133,7 +133,7 @@ while 1:
             break
         if isansmq[i - 1] == 1:
             continue
-        print(isansmq)
+        # print(isansmq)
     else:
         print("Unknown")
         break
