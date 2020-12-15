@@ -101,15 +101,20 @@ ansIndex = 0
 rightIndex = 0
 i = 0
 index = 0
-if mode == 3:
+while mode == 3:
     index = int(input(f"input x(1-{{indexx}}):".format(indexx=len(mq))))
+    x = index
     if index < 1 or index > len(mq):
         print("{indexx} in illegal".format(indexx=index))
+        continue
+    else:
+        break
 
 # print(len(mq))
 while 1:
     if mode == 1:
         i = int(input("question(1 - {kk}):".format(kk=len(mq))))
+
     elif mode == 2:
         i = randint(1, len(mq))
         # print("i:", end="")
@@ -119,12 +124,20 @@ while 1:
         if isansmq[i-1] == 1:
             continue
         print(isansmq)
+
     elif mode == 3:
         i = index
         index += 1
+        index = (index - x) % (len(mq) - x + 1) + x
+        if 0 not in isansmq[x-1:]:
+            break
+        if isansmq[i - 1] == 1:
+            continue
+        print(isansmq)
     else:
         print("Unknown")
         break
+
     i -= 1
     if i < 0 or i >= len(mq):
         break
