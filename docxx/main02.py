@@ -123,7 +123,7 @@ while 1:
             break
         if isansmq[i-1] == 1:
             continue
-        print(isansmq)
+        # print(isansmq)
 
     elif mode == 3:
         i = index
