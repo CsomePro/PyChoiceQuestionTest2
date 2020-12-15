@@ -114,12 +114,11 @@ while 1:
         i = randint(1, len(mq))
         # print("i:", end="")
         # print(i)
-        if ansIndex >= len(mq):
+        if 0 not in isansmq:
             break
         if isansmq[i-1] == 1:
             continue
-        else:
-            isansmq[i-1] = 1
+        print(isansmq)
     elif mode == 3:
         i = index
         index += 1
@@ -137,6 +136,7 @@ while 1:
     if ans.upper() == ra[i]:
         print("right!!")
         rightIndex += 1
+        isansmq[i] = 1
     else:
         print("wrong")
     ansIndex += 1
@@ -144,4 +144,5 @@ while 1:
     print("正确答案：" + ra[i])
     print("正确率：{x}%  {rights}/{anss}".format(x=op,anss=ansIndex,rights=rightIndex))
     print()
+
 os.system("pause")
