@@ -15,6 +15,11 @@ s = ""
 miniment = 0
 duoxuan = 0
 
+print("PyChoiceQuestionTest1\n"
+      "version 1.0  Power by CSOME\n"
+      "There is a new version 2, please check for https://github.com/CsomePro/PyChoiceQuestionTest2"
+      "-------------------------------------")
+
 
 def panduanti():
     global s, ra, mq

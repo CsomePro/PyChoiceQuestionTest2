@@ -14,6 +14,10 @@ isansmq = []  # need to save
 mode = 1  # need to save
 x = 1  # need to save
 
+print("PyChoiceQuestionTest2\n"
+      "version 2.2  Power by CSOME\n"
+      "-------------------------------------")
+
 if not os.path.exists(r'data.json'):
     print("Initializing...")
     while 1:
