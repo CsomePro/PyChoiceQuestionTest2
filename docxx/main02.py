@@ -28,10 +28,12 @@ if not os.path.exists(r'data.json'):
 
 else:
     inp1 = input("Do you want to load your data(y/n):")
+    with open(r'data.json', 'r') as f:
+        data = json.loads(f.read())
+        path = data['path']
     if inp1 is 'y' or inp1 is 'Y':
         with open(r'data.json', 'r') as f:
             data = json.loads(f.read())
-            path = data['path']
             init = data['init']
             if init == 0:
                 ansIndex = data['ansIndex']
@@ -213,7 +215,7 @@ if save == 1:
                     'ansIndex': ansIndex,
                     'rightIndex': rightIndex,
                     'i': i,
-                    'index': index - 1,
+                    'index': i+1,
                     'isansmq': isansmq,
                     'mode': mode,
                     'x': x}
