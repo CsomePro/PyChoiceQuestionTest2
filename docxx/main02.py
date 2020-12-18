@@ -94,8 +94,11 @@ def strreplace(s):
     for i in s:
         try:
             inp = int(i)
+            assert inp != 0
             ss += target[inp - 1]
         except ValueError:
+            ss += i
+        except AssertionError:
             ss += i
     return ss
 
