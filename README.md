@@ -1,4 +1,4 @@
-# PyChoiceQuestionTest 3.0
+# PyChoiceQuestionTest 2
 ### 运行环境Python3
 参考此文配置Python3环境
 
@@ -13,36 +13,14 @@
 
 [安装教程](https://www.jb51.net/article/1738)
 
+### 下载
+
+建议直接下载完整ZIP，双击`main02.py`即可使用
+
 ### 使用说明
-version 1  `docxx/main01.py` （不推荐）
-
-用法：将mian.py中的 path的值 改为你目标题库的路径
-
-(用记事本修改)
-
-`path = r"你的路径"`
-
-修改之后直接双击打开
-
-
-效果展示
-``` python
-1.you choose the question's index # 自主选题，自测
-2.auto random question's index # 自动随机选题自测
-3.one by one test from 1 to end # 按顺序从1开始自测
-2
-（多选）24、清王朝与法国签订的条约有（）
-A.《马关条约》B.《中法新约》C.《北京条约》D.《辛丑条约》
-
-answer:abc
-wrong
-正确答案：BC
-正确率：0.0%  0/1
-```
-
 version 2  `docxx/main02.py` （推荐）
 
-使用说明：按提示操作
+使用说明：直接双击打开,按提示操作
 
 （注意：必须是`.docx`后缀的word文档，`.doc`的不支持）
 
@@ -61,6 +39,31 @@ A、执行急难险重任务 B、参军参战 C、建设祖国 D、执行战斗�
 
 answer(input 'quit' to quit):quit
 Do you want to save(y/n)y
+```
+
+version 1  `docxx/main01.py` （不推荐）
+
+用法：将mian.py中的 path的值 改为你目标题库的路径
+
+(用记事本修改)
+
+`path = r"你的路径"`
+
+修改之后直接双击打开
+
+效果展示
+``` python
+1.you choose the question's index # 自主选题，自测
+2.auto random question's index # 自动随机选题自测
+3.one by one test from 1 to end # 按顺序从1开始自测
+2
+（多选）24、清王朝与法国签订的条约有（）
+A.《马关条约》B.《中法新约》C.《北京条约》D.《辛丑条约》
+
+answer:abc
+wrong
+正确答案：BC
+正确率：0.0%  0/1
 ```
 
 ### 更新功能说明
@@ -101,3 +104,5 @@ main02.py verison 2
 2020.12.18 version 2.2.1
 
 添加 在回答问题时用数字1234来替代ABCD，方便输入
+
+添加 显示当前题库
