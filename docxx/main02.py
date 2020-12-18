@@ -88,6 +88,18 @@ def panduanti():
         s = ""
 
 
+def strreplace(s):
+    target = "ABCDEFGHI"
+    ss = ""
+    for i in s:
+        try:
+            inp = int(i)
+            ss += target[inp - 1]
+        except ValueError:
+            ss += i
+    return ss
+
+
 for paragraph in document.paragraphs:
     j = 4
     # print(paragraph.text)
@@ -197,6 +209,7 @@ while 1:
     print("第{ii}题".format(ii=i + 1))
     print(mq[i])
     ans = input("answer(input 'quit' to quit):")
+    ans = strreplace(ans)
     if ans == "quit":
         break
     if ans.upper() == ra[i]:
@@ -219,7 +232,7 @@ if save == 1:
                     'ansIndex': ansIndex,
                     'rightIndex': rightIndex,
                     'i': i,
-                    'index': i+1,
+                    'index': i + 1,
                     'isansmq': isansmq,
                     'mode': mode,
                     'x': x}
