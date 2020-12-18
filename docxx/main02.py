@@ -15,7 +15,7 @@ mode = 1  # need to save
 x = 1  # need to save
 
 print("PyChoiceQuestionTest2\n"
-      "version 2.2  Power by CSOME\n"
+      "version 2.2.1  Power by CSOME\n"
       "-------------------------------------")
 
 if not os.path.exists(r'data.json'):
@@ -209,7 +209,10 @@ while 1:
     if i < 0 or i >= len(mq):
         save = 0
         break
-    print("第{ii}题".format(ii=i + 1))
+
+    print("第{ii}题  ".format(ii=i + 1), end="")
+    print("( 题库: {pathh} )".format(pathh=path))
+
     print(mq[i])
     ans = input("answer(input 'quit' to quit):")
     ans = strreplace(ans)
