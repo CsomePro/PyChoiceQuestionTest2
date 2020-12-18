@@ -1,4 +1,4 @@
-# PyChoiceQuestionTest 3.0
+# PyChoiceQuestionTest 2
 ### 运行环境Python3
 参考此文配置Python3环境
 
