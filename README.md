@@ -13,6 +13,10 @@
 
 [安装教程](https://www.jb51.net/article/1738)
 
+### 下载
+
+建议直接下载完整ZIP，双击`main02.py`即可使用
+
 ### 使用说明
 version 2  `docxx/main02.py` （推荐）
 
