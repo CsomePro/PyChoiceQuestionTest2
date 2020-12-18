@@ -164,7 +164,7 @@ if init == 1:
                      "2.auto random question's index\n"
                      "3.one by one test from x to end\n"))  # need to save
     while mode == 3:
-        index = int(input(f"input x(1-{{indexx}}):".format(indexx=len(mq))))
+        index = int(input("input x(1-{indexx}):".format(indexx=len(mq))))
         x = index
         if index < 1 or index > len(mq):
             print("{indexx} in illegal".format(indexx=index))
@@ -214,9 +214,9 @@ while 1:
     print("( 题库: {pathh} )".format(pathh=path))
 
     print(mq[i])
-    ans = input("answer(input 'quit' to quit):")
+    ans = input("answer(input 'q' to quit):")
     ans = strreplace(ans)
-    if ans == "quit":
+    if ans == "q":
         break
     if ans.upper() == ra[i]:
         print("right!!")
