@@ -103,11 +103,13 @@ def strreplace(s):
     return ss
 
 
+lenPar = len(document.paragraphs)
 for paragraph in document.paragraphs:
     j = 4
     # print(paragraph.text)
     if "1、" in paragraph.text or kk > 0:
         kk += 1
+        # print("\r{:3}%".format(int(kk / lenPar * 10000 + 0.5) / 100), end="")
         spr = paragraph.text
         s += spr + "\n"
         if re.search("[0-9]*", spr).group(0) is not "":
