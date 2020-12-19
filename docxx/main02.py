@@ -13,6 +13,7 @@ index = 0  # need to save
 isansmq = []  # need to save
 mode = 1  # need to save
 x = 1  # need to save
+combo = 0  # need to save
 
 print("PyChoiceQuestionTest2\n"
       "version 2.2.1  Power by CSOME\n"
@@ -47,6 +48,7 @@ else:
                 isansmq = data['isansmq']
                 mode = data['mode']
                 x = data['x']
+                combo = data['combo']
         if init == 1:
             print("You have not saved, just start initially.")
     else:
@@ -224,12 +226,16 @@ while 1:
         print("right!!")
         rightIndex += 1
         isansmq[i] = 1
+        combo += 1
     else:
         print("wrong")
+        combo = 0
     ansIndex += 1
     tmp = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
     print("正确答案：" + ra[i])
-    print("正确率：{x}%  {rights}/{anss}".format(x=tmp, anss=ansIndex, rights=rightIndex))
+    print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
+    if combo is not 0:
+        print("{combo} Combo !!".format(combo=combo))
     print()
 
 if save == 1:
@@ -243,7 +249,8 @@ if save == 1:
                     'index': i + 1,
                     'isansmq': isansmq,
                     'mode': mode,
-                    'x': x}
+                    'x': x,
+                    'combo': combo}
             f.write(json.dumps(data))
 else:
     with open(r'data.json', 'w') as f:
