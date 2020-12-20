@@ -18,6 +18,7 @@ version = '2.2.2'
 
 print("PyChoiceQuestionTest2\n"
       "version {versionn} Power by CSOME\n"
+      "Check github.com/CsomePro/PyChoiceQuestionTest2 to update\n"
       "-------------------------------------".format(versionn=version))
 
 if not os.path.exists(r'data.json'):
