@@ -1,3 +1,4 @@
+import time
 from random import randint
 from docx import Document
 import re
@@ -241,7 +242,7 @@ while 1:
         print("{combo} Combo !!".format(combo=combo))
     print()
 
-if save == 1:
+if save == 1:  # 用户选择保存
     if input("Do you want to save(y/n)") == 'y':
         with open(r'data.json', 'w') as f:
             data = {'version': version,
@@ -257,10 +258,18 @@ if save == 1:
                     'combo': combo}
             f.write(json.dumps(data))
 else:
-    if save == 2:
+    if save == 2:  # 刷题结束时
         print("题库已刷完！ ", end="")
         tmp = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
         print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
+        with open("Report.txt", 'a') as f:  # 保存记录
+            report = "\n"
+            report += str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "\n"
+            report += "( 题库: {pathh} )".format(pathh=path)
+            report += "正确率：{x}%  {rights}/{anss}  ".format(x=tmp, anss=ansIndex, rights=rightIndex)
+            report += "\n"
+            f.write(report)
+
     with open(r'data.json', 'w') as f:
         data = {'version': version, 'path': path, 'init': 1}
         f.write(json.dumps(data))
