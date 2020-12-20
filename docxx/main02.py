@@ -36,7 +36,7 @@ else:
     with open(r'data.json', 'r') as f:
         data = json.loads(f.read())
         path = data['path']
-    if inp1 is 'y' or inp1 is 'Y':
+    if inp1 == 'y' or inp1 == 'Y':
         with open(r'data.json', 'r') as f:
             data = json.loads(f.read())
             init = data['init']
@@ -53,7 +53,7 @@ else:
             print("You have not saved, just start initially.")
     else:
         inp2 = input("Do you want to change Question bank(y/n):")
-        if inp2 is 'y' or inp2 is 'Y':
+        if inp2 == 'y' or inp2 == 'Y':
             while 1:
                 path = input("Enter your Question bank filename or file path:")
                 if os.path.exists(path):
@@ -239,7 +239,7 @@ while 1:
     print()
 
 if save == 1:
-    if input("Do you want to save(y/n)") is 'y':
+    if input("Do you want to save(y/n)") == 'y':
         with open(r'data.json', 'w') as f:
             data = {'init': 0,
                     'path': path,
