@@ -264,8 +264,8 @@ else:
         print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
         with open("Report.txt", 'a') as f:  # 保存记录
             report = "\n"
-            report += str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "\n"
-            report += "( 题库: {pathh} ) mode={modee}".format(pathh=path, modee= mode)
+            report += str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "   mode {modee}\n".format(modee=mode)
+            report += "( 题库: {pathh} )  ".format(pathh=path)
             report += "正确率：{x}%  {rights}/{anss}  ".format(x=tmp, anss=ansIndex, rights=rightIndex)
             report += "\n"
             f.write(report)
