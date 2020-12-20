@@ -114,17 +114,17 @@ for paragraph in document.paragraphs:
         # print("\r{:3}%".format(int(kk / lenPar * 10000 + 0.5) / 100), end="")
         spr = paragraph.text
         s += spr + "\n"
-        if re.search("[0-9]*", spr).group(0) is not "":
+        if re.search("[0-9]*", spr).group(0) != "":
             s = spr + "\n"
             isp = 0
 
-        if re.search("[0-9]、", s) is not None or re.search("[0-9].", s) is not None:
+        if re.search("[0-9]、", s) != None or re.search("[0-9].", s) != None:
             if "√" in s or "×" in s or "╳" in s or "X" in s:
                 panduanti()
                 continue
 
             rrra = re.search("[A-Z]*[A-Z]", s)
-            if rrra is not None:
+            if rrra != None:
                 miniment = len(rrra.group(0))
                 if miniment > 1 and duoxuan == 0:
                     s = "（多选）" + s
@@ -149,7 +149,7 @@ for paragraph in document.paragraphs:
                 # print()
                 # q.append(s)
                 rrra = re.search("[A-Z]*[A-Z]", s)
-                if rrra is not None:
+                if rrra != None:
                     rra = rrra.group(0)
                     ra.append(rra)
                     mq.append(s.replace(rra, "", 1))
@@ -188,7 +188,7 @@ while 1:
         # print("i:", end="")
         # print(i)
         if 0 not in isansmq:
-            save = 0
+            save = 2
             break
         if isansmq[i - 1] == 1:
             continue
@@ -199,7 +199,7 @@ while 1:
         index += 1
         index = (index - x) % (len(mq) - x + 1) + x
         if 0 not in isansmq[x - 1:]:
-            save = 0
+            save = 2
             break
         if isansmq[i - 1] == 1:
             continue
@@ -234,7 +234,7 @@ while 1:
     tmp = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
     print("正确答案：" + ra[i])
     print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
-    if combo is not 0:
+    if combo != 0:
         print("{combo} Combo !!".format(combo=combo))
     print()
 
@@ -253,6 +253,10 @@ if save == 1:
                     'combo': combo}
             f.write(json.dumps(data))
 else:
+    if save == 2:
+        print("题库已刷完！ ", end="")
+        tmp = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
+        print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
     with open(r'data.json', 'w') as f:
         data = {'path': path, 'init': 1}
         f.write(json.dumps(data))
