@@ -164,6 +164,7 @@ for paragraph in document.paragraphs:
 # for i in mq:
 #     print(i)
 #     print("@\n")
+print()
 if init == 1:
     isansmq = [0 for i in range(len(mq))]  # need to save
     mode = int(input("1.you choose the question's index\n"
