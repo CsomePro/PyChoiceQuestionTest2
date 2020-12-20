@@ -16,7 +16,7 @@ x = 1  # need to save
 combo = 0  # need to save
 
 print("PyChoiceQuestionTest2\n"
-      "version 2.2.1  Power by CSOME\n"
+      "version 2.2.2  Power by CSOME\n"
       "-------------------------------------")
 
 if not os.path.exists(r'data.json'):
