@@ -14,10 +14,11 @@ isansmq = []  # need to save
 mode = 1  # need to save
 x = 1  # need to save
 combo = 0  # need to save
+version = '2.2.2'
 
 print("PyChoiceQuestionTest2\n"
-      "version 2.2.2  Power by CSOME\n"
-      "-------------------------------------")
+      "version {versionn} Power by CSOME\n"
+      "-------------------------------------".format(versionn=version))
 
 if not os.path.exists(r'data.json'):
     print("Initializing...")
@@ -28,7 +29,7 @@ if not os.path.exists(r'data.json'):
         else:
             print("'{file}' does not exist, please try again.".format(file=path))
     with open(r'data.json', 'w') as f:
-        data = {'path': path, 'init': 1}
+        data = {'version': version, 'path': path, 'init': 1}
         f.write(json.dumps(data))
 
 else:
@@ -118,7 +119,7 @@ for paragraph in document.paragraphs:
             s = spr + "\n"
             isp = 0
 
-        if re.search("[0-9]、", s) != None or re.search("[0-9].", s) != None:
+        if (re.search("[0-9]、", s) != None) or (re.search("[0-9].", s) != None):
             if "√" in s or "×" in s or "╳" in s or "X" in s:
                 panduanti()
                 continue
@@ -241,7 +242,8 @@ while 1:
 if save == 1:
     if input("Do you want to save(y/n)") == 'y':
         with open(r'data.json', 'w') as f:
-            data = {'init': 0,
+            data = {'version': version,
+                    'init': 0,
                     'path': path,
                     'ansIndex': ansIndex,
                     'rightIndex': rightIndex,
@@ -258,7 +260,7 @@ else:
         tmp = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
         print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
     with open(r'data.json', 'w') as f:
-        data = {'path': path, 'init': 1}
+        data = {'version': version, 'path': path, 'init': 1}
         f.write(json.dumps(data))
 
 os.system("pause")
