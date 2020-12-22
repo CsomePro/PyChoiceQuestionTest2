@@ -1,10 +1,209 @@
 import time
 from random import randint
-from docx import Document
 import re
 import os
 import json
 
+# import尝试段
+count = 3
+while count:
+    try:
+        import requests
+
+        count = 3
+        break
+    except ImportError:
+        print('requests模块未安装,现在准备开始安装')
+        os.system("pip install requests -i https://pypi.tuna.tsinghua.edu.cn/simple")
+        count -= 1
+        continue
+
+while count:
+    try:
+        from docx import Document
+
+        count = 3
+        break
+    except ImportError:
+        print('docx模块未安装,现在准备开始安装')
+        os.system("pip install python-docx -i https://pypi.tuna.tsinghua.edu.cn/simple")
+        count -= 1
+        continue
+
+if count != 3:
+    print("加载失败，请稍后再试。")
+    exit(-1)
+
+
+# --------------------------------------------------------------------------------- #
+
+# 函数段
+def deletefile(file, flag):
+    if os.path.exists(file):
+        if flag == 0:
+            os.remove(file)
+        elif flag == 1:
+            os.rmdir(file)
+
+
+def update_file(downloadUrl, objectName, targetFile):
+    mainFile = objectName + "-master/doxx/" + targetFile
+    try:
+        import zipfile
+        # 下载zip文件
+        print('正在下载文件，请不要关闭窗口...')
+        with open('tmp.zip', 'wb') as f:
+            f.write(requests.get(downloadUrl).content)
+        # 解压zip文件
+        zipFile = zipfile.ZipFile('tmp.zip')
+        zipFile.extract(mainFile)
+        zipFile.close()
+
+        # 复制文件
+        print('正在合并文件，请不要关闭窗口...')
+        with open(mainFile, 'rb') as source:
+            with open(targetFile, 'wb') as destination:
+                destination.write(source.read())
+
+        # 删除文件
+        os.remove('tmp.zip')
+        os.remove(mainFile)
+        os.rmdir(objectName + "-master/doxx")
+        os.rmdir(objectName + "-master")
+        print('更新成功！重启程序后生效')
+
+    except:
+        print("更新失败，请稍后再试。")
+        deletefile('tmp.zip', 0)
+        deletefile(mainFile, 0)
+        deletefile(objectName + "-master/doxx", 1)
+        deletefile(objectName + "-master", 1)
+        exit(-1)
+
+
+def update_this():
+    print("检查更新中...")
+    url = 'https://github.com/CsomePro/PyChoiceQuestionTest2/archive/master.zip'
+    objectname = 'TestTheAutoUpdate-master'
+    targetfile = 'main02.py'
+    api = 'https://api.github.com/repos/CsomePro/PyChoiceQuestionTest2'
+    allInfo = requests.get(api).json()
+    new_time = time.mktime(time.strptime(allInfo['updated_at'], "%Y-%m-%dT%H:%M:%SZ"))
+    file_time = os.path.getmtime('main02.py') - 28800
+    if new_time > file_time:
+        inp3 = input("检测到最新版，是否更新?(y/n)")
+        if inp3 == 'y' or inp3 == 'Y':
+            update_file(url, objectname, targetfile)
+            return 1
+        else:
+            return 0
+    else:
+        print("已是最新版")
+        return 0
+
+
+def strreplace(s, n):
+    target = "ABCDEFGHI"
+    s = s[:n]
+    ss = [0 for iii in range(n)]
+    for ki in s:
+        try:
+            inp = int(ki)
+            assert inp != 0
+            ss[inp - 1] = 1
+        except ValueError:
+            ss[target.find(ki.upper())] = 1
+        except AssertionError:
+            ss[target.find(ki.upper())] = 1
+    return ss
+
+
+def lToStr(lTmp):
+    target = "ABCDEFGHI"
+    stmp = ""
+    for ki in range(len(lTmp)):
+        if lTmp[ki] == 1:
+            stmp += target[ki]
+    return stmp
+
+
+def charChange(s):
+    ss = s.replace("Ａ", "A")
+    ss = ss.replace("Ｂ", "B")
+    ss = ss.replace("Ｃ", "C")
+    ss = ss.replace("Ｄ", "D")
+    ss = ss.replace("Ｅ", "E")
+    return ss
+
+
+def charChangePoint(s):
+    ss = s.replace("、", "", 1)
+    ss = ss.replace(".", "", 1)
+    ss = ss.replace("．", "", 1)
+    return ss
+
+
+def ansSplit(ans):
+    sAns = "ABCDEFGHIJKLMNOPQ"
+    sAnsIndex = 0
+    ans = ans[1:]
+    ansReturn = []
+    jj = 0
+    lenAns = len(ans)
+    while jj < lenAns:
+        if ans[jj] == sAns[sAnsIndex]:
+            sAnsIndex += 1
+            # print(ans[jj])
+            jj += 1
+            anss = ""
+            while jj < lenAns:
+                if ans[jj] == sAns[sAnsIndex]:
+                    break
+                else:
+                    anss += ans[jj]
+                    jj += 1
+            ansReturn.append(charChangePoint(anss))
+            jj -= 1
+        jj += 1
+    return ansReturn
+
+
+def rightAnsChange(sRight):
+    rightAnsReturn = []
+    sAns = "ABCDEFGHIJKLMNOPQ"
+    for ss in sRight:
+        rightIndex = sAns.find(ss)
+        rightAnsReturn.append(rightIndex)
+    return rightAnsReturn
+
+
+def panduanti(sInput):
+    global questionMap
+    questionMode = 3
+    rightAnsP = ""
+    question = ""
+    if "√" in sInput or "对" in sInput:
+        rightAnsP = 'T'
+        sInput = sInput.replace("对", " ", 1)
+        question = sInput.replace("√", " ", 1)
+    elif "×" in sInput or "╳" in sInput or "X" in sInput or "错" in sInput:
+        rightAnsP = 'F'
+        sInput = sInput.replace("×", " ")
+        sInput = sInput.replace("╳", " ")
+        sInput = sInput.replace("错", " ")
+        question = sInput.replace("X", " ")
+    dictionary = {
+        'questionMode': questionMode,
+        'question': question,
+        'rightAns': rightAnsP
+    }
+    questionMap.append(dictionary)
+
+
+# --------------------------------------------------------------------------------- #
+
+
+# 正文段
 init = 1
 path = r"js02.docx"  # need to save
 ansIndex = 0  # need to save
@@ -15,12 +214,11 @@ isansmq = []  # need to save
 mode = 1  # need to save
 x = 1  # need to save
 combo = 0  # need to save
-version = '2.2.2'
+version = '2.3.0'  # need to save
 
 print("PyChoiceQuestionTest2\n"
-      "version {versionn} Power by CSOME\n"
-      "Check github.com/CsomePro/PyChoiceQuestionTest2 to update\n"
-      "-------------------------------------".format(versionn=version))
+      "version {versionn} Power by CSOME (github.com/CsomePro)\n"
+      "------------------------------------------------------".format(versionn=version))
 
 if not os.path.exists(r'data.json'):
     print("Initializing...")
@@ -31,14 +229,21 @@ if not os.path.exists(r'data.json'):
         else:
             print("'{file}' does not exist, please try again.".format(file=path))
     with open(r'data.json', 'w') as f:
-        data = {'version': version, 'path': path, 'init': 1}
+        updateCheck = time.time()
+        data = {'version': version, 'path': path, 'init': 1, 'updateCheck': updateCheck}
         f.write(json.dumps(data))
 
 else:
-    inp1 = input("Do you want to load your data(y/n):")
     with open(r'data.json', 'r') as f:
         data = json.loads(f.read())
         path = data['path']
+        updateCheck = data['updateCheck']
+    # 更新检查
+    if time.time() - updateCheck > 86400:
+        update_this()
+        updateCheck = time.time()
+
+    inp1 = input("Do you want to load your data(y/n):")
     if inp1 == 'y' or inp1 == 'Y':
         with open(r'data.json', 'r') as f:
             data = json.loads(f.read())
@@ -64,131 +269,111 @@ else:
                 else:
                     print("'{file}' does not exist, please try again.".format(file=path))
 
+# ----------------------------------------------------------------------------------------
+# 文档识别
 document = Document(path)
-kk = 0
-isp = 0
-mq = []
-ra = []
-s = ""
-miniment = 0
-duoxuan = 0
-
-
-def panduanti():
-    global s, ra, mq
-    if "√" in s:
-        s = "（判断题 T or F）" + s
-        ra.append("T")
-        s = s.replace("√", "")
-        mq.append(s)
-        s = ""
-
-    elif "×" in s or "╳" in s or "X" in s:
-        s = "（判断题 T or F）" + s
-        ra.append("F")
-        s = s.replace("×", "")
-        s = s.replace("╳", "")
-        s = s.replace("X", "")
-        mq.append(s)
-        s = ""
-
-
-def strreplace(s):
-    target = "ABCDEFGHI"
-    ss = ""
-    for i in s:
-        try:
-            inp = int(i)
-            assert inp != 0
-            ss += target[inp - 1]
-        except ValueError:
-            ss += i
-        except AssertionError:
-            ss += i
-    return ss
-
-
-lenPar = len(document.paragraphs)
+rawData = []
 for paragraph in document.paragraphs:
-    j = 4
-    # print(paragraph.text)
-    if "1、" in paragraph.text or kk > 0:
-        kk += 1
-        # print("\r{:3}%".format(int(kk / lenPar * 10000 + 0.5) / 100), end="")
-        spr = paragraph.text
-        s += spr + "\n"
-        if re.search("[0-9]*", spr).group(0) != "":
-            s = spr + "\n"
-            isp = 0
+    rawData.append(charChange(paragraph.text))
 
-        if (re.search("[0-9]、", s) != None) or (re.search("[0-9].", s) != None):
-            if "√" in s or "×" in s or "╳" in s or "X" in s:
-                panduanti()
-                continue
+questionMap = []
+question = ""
+choice = []
+rightAns = []
+changeTmp = 0  # 识别题目0，识别选项1
+questionMode = 0
+lenn = len(rawData)
+ii = 0
+while ii < lenn:
+    if re.match(r'[0-9]+', rawData[ii]) != None:
+        s = rawData[ii]
+        # 判断题
+        if re.search(r"[X对错]\b", s) != None or "╳" in s or "×" in s or "√" in s:
+            panduanti(s)
+            ii += 1
+            continue
 
-            rrra = re.search("[A-Z]*[A-Z]", s)
-            if rrra != None:
-                miniment = len(rrra.group(0))
-                if miniment > 1 and duoxuan == 0:
-                    s = "（多选）" + s
-                    duoxuan = 1
+        # 选择题
+        rightAnsRe = re.search(r'[A-Z]+?\b', s)
+        if rightAnsRe != None:
+            rightAns = rightAnsChange(rightAnsRe.group(0))
+            if len(rightAns) > 1:
+                questionMode = 2
             else:
-                continue
+                questionMode = 1
+            span = rightAnsRe.span()
+            question = s[:span[0]] + "  " + s[span[1]:]
+            changeTmp = 1
+            ansRaw = ""
+            for j in range(ii + 1, lenn):
+                if not (re.match(r'[0-9]+', rawData[j]) != None):
+                    ansRaw += rawData[j]
+                else:
+                    ansRawRe = re.split(r'([A-F])', ansRaw)
+                    choice = ansSplit(ansRawRe)
+                    rightAnsMap = [0 for i in range(len(choice))]
+                    for kk in rightAns:
+                        rightAnsMap[kk] = 1
+                    dictionary = {
+                        'questionMode': questionMode,
+                        'question': question,
+                        'rightAns': rightAnsMap,
+                        'choice': choice
+                    }
+                    questionMap.append(dictionary)
+                    ii = j - 1
+                    break
+    ii += 1
 
-            if "A" in spr:
-                isp += 1
-            if "B" in spr:
-                isp += 1
-            if "C" in spr:
-                isp += 1
-            if "D" in spr:
-                isp += 1
-            if "E" in spr:
-                j = 5
-                isp += 1
-
-            if isp >= miniment + j:
-                # print(s)
-                # print()
-                # q.append(s)
-                rrra = re.search("[A-Z]*[A-Z]", s)
-                if rrra != None:
-                    rra = rrra.group(0)
-                    ra.append(rra)
-                    mq.append(s.replace(rra, "", 1))
-                    # print(mq[-1])
-                    # print()
-                s = ""
-                duoxuan = 0
-                isp = 0
-
-# for i in mq:
+# for i in questionMap:
 #     print(i)
 #     print("@\n")
 print()
 if init == 1:
-    isansmq = [0 for i in range(len(mq))]  # need to save
-    mode = int(input("1.you choose the question's index\n"
-                     "2.auto random question's index\n"
-                     "3.one by one test from x to end\n"))  # need to save
+    isansmq = [0 for i in range(len(questionMap))]  # need to save
+    print("1.you choose the question's index\n"
+          "2.auto random question's index\n"
+          "3.one by one test from x to end")
+    while 1:
+        try:
+            mode = int(input("mode:"))  # need to save
+            break
+        except ValueError:
+            print("your input is not INT, please try again")
+            continue
+
     while mode == 3:
-        index = int(input("input x(1-{indexx}):".format(indexx=len(mq))))
+        while 1:
+            try:
+                index = int(input("input x(1-{indexx}):".format(indexx=len(questionMap))))
+                break
+            except ValueError:
+                print("your input is not INT, please try again")
+                continue
+
         x = index
-        if index < 1 or index > len(mq):
+        if index < 1 or index > len(questionMap):
             print("{indexx} in illegal".format(indexx=index))
             continue
         else:
             break
 
-# print(len(mq))
-save = 1  # 判断是否是非法跳出，或是刷题结束
+save = 1  # 判断是否是非法跳出0，或是刷题结束2
+tl = ["（单选题）", "（多选题）", "（判断题 T or F）"]
+sAns = "ABCDEFGHIJKLMNOPQ"
 
 while 1:
     if mode == 1:
-        i = int(input("question(1 - {kk}):".format(kk=len(mq))))
+        while 1:
+            try:
+                i = int(input("question(1 - {kk}):".format(kk=len(questionMap))))
+                break
+            except ValueError:
+                print("your input is not INT, please try again")
+                continue
 
     elif mode == 2:
-        i = randint(1, len(mq))
+        i = randint(1, len(questionMap))
         # print("i:", end="")
         # print(i)
         if 0 not in isansmq:
@@ -196,47 +381,67 @@ while 1:
             break
         if isansmq[i - 1] == 1:
             continue
-        # print(isansmq)
 
     elif mode == 3:
         i = index
         index += 1
-        index = (index - x) % (len(mq) - x + 1) + x
+        index = (index - x) % (len(questionMap) - x + 1) + x
         if 0 not in isansmq[x - 1:]:
             save = 2
             break
         if isansmq[i - 1] == 1:
             continue
-        # print(isansmq)
     else:
         print("Unknown")
         save = 0
         break
 
     i -= 1
-    if i < 0 or i >= len(mq):
+    if i < 0 or i >= len(questionMap):
         save = 0
         break
-
     print("第{ii}题  ".format(ii=i + 1), end="")
     print("( 题库: {pathh} )".format(pathh=path))
+    if questionMap[i]['questionMode'] <= 2:
+        print(tl[questionMap[i]['questionMode'] - 1], end="")
+        print(questionMap[i]['question'])
+        choices = questionMap[i]['choice']
+        choiceIndex = 0
+        for choiceOut in choices:
+            print(sAns[choiceIndex] + "、", end="")
+            choiceIndex += 1
+            print(choiceOut)
+        ans = input("answer(input 'q' to quit):")
+        if ans == "q":
+            break
+        ans = strreplace(ans, len(questionMap[i]['choice']))
+        if ans == questionMap[i]['rightAns']:
+            print("right!!")
+            rightIndex += 1
+            isansmq[i] = 1
+            combo += 1
+        else:
+            print("wrong")
+            combo = 0
 
-    print(mq[i])
-    ans = input("answer(input 'q' to quit):")
-    ans = strreplace(ans)
-    if ans == "q":
-        break
-    if ans.upper() == ra[i]:
-        print("right!!")
-        rightIndex += 1
-        isansmq[i] = 1
-        combo += 1
-    else:
-        print("wrong")
-        combo = 0
+    elif questionMap[i]['questionMode'] == 3:
+        print(tl[questionMap[i]['questionMode'] - 1], end="")
+        print(questionMap[i]['question'])
+        ans = input("answer(input 'q' to quit):")
+        if ans == "q":
+            break
+        if ans == questionMap[i]['rightAns']:
+            print("right!!")
+            rightIndex += 1
+            isansmq[i] = 1
+            combo += 1
+        else:
+            print("wrong")
+            combo = 0
+
     ansIndex += 1
     tmp = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
-    print("正确答案：" + ra[i])
+    print("正确答案：" + lToStr(questionMap[i]['rightAns']))
     print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
     if combo != 0:
         print("{combo} Combo !!".format(combo=combo))
@@ -255,7 +460,8 @@ if save == 1:  # 用户选择保存
                     'isansmq': isansmq,
                     'mode': mode,
                     'x': x,
-                    'combo': combo}
+                    'combo': combo,
+                    'updateCheck': updateCheck}
             f.write(json.dumps(data))
 else:
     if save == 2:  # 刷题结束时
@@ -271,7 +477,7 @@ else:
             f.write(report)
 
     with open(r'data.json', 'w') as f:
-        data = {'version': version, 'path': path, 'init': 1}
+        data = {'version': version, 'path': path, 'init': 1, 'updateCheck': updateCheck}
         f.write(json.dumps(data))
 
 os.system("pause")
