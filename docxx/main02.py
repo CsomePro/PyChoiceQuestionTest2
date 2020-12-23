@@ -13,7 +13,7 @@ while count:
         count = 3
         break
     except ImportError:
-        print('requests模块未安装,现在准备开始安装')
+        print('requests模块未安装,现在准备开始安装...')
         os.system("pip install requests -i https://pypi.tuna.tsinghua.edu.cn/simple")
         count -= 1
         continue
@@ -25,7 +25,7 @@ while count:
         count = 3
         break
     except ImportError:
-        print('docx模块未安装,现在准备开始安装')
+        print('docx模块未安装,现在准备开始安装...')
         os.system("pip install python-docx -i https://pypi.tuna.tsinghua.edu.cn/simple")
         count -= 1
         continue
@@ -110,7 +110,8 @@ def strreplace(s, n):
         try:
             inp = int(ki)
             assert inp != 0
-            ss[inp - 1] = 1
+            if inp <= n:
+                ss[inp - 1] = 1
         except ValueError:
             ss[target.find(ki.upper())] = 1
         except AssertionError:
@@ -200,6 +201,24 @@ def panduanti(sInput):
     questionMap.append(dictionary)
 
 
+def swap(A, a, b):
+    A[a], A[b] = A[b], A[a]
+    return A
+
+
+def randomChange(ansList, choiceList):
+    countTmp = 3
+    while countTmp:
+        randomIndex1 = randint(0, len(choice) - 1)
+        randomIndex2 = randint(0, len(choice) - 1)
+        if randomIndex1 == randomIndex2:
+            continue
+        swap(ansList, randomIndex1, randomIndex2)
+        swap(choiceList, randomIndex1, randomIndex2)
+        countTmp -= 1
+    return ansList, choiceList
+
+
 # --------------------------------------------------------------------------------- #
 
 
@@ -215,6 +234,7 @@ mode = 1  # need to save
 x = 1  # need to save
 combo = 0  # need to save
 version = '2.3.0'  # need to save
+randomChoice = True  # need to save
 
 print("PyChoiceQuestionTest2\n"
       "version {versionn} Power by CSOME (github.com/CsomePro)\n"
@@ -257,6 +277,7 @@ else:
                 mode = data['mode']
                 x = data['x']
                 combo = data['combo']
+                randomChoice = data['randomChoice']
         if init == 1:
             print("You have not saved, just start initially.")
     else:
@@ -357,6 +378,17 @@ if init == 1:
             continue
         else:
             break
+    while 1:
+        inp3 = input("是否开启随机选项顺序？(y/n)")
+        if inp3 == 'y' or inp3 == 'Y':
+            randomChoice = True
+            break
+        elif inp3 == 'n' or inp3 == 'N':
+            randomChoice = False
+            break
+        else:
+            print("please choose y(Yes) or n(No)")
+            continue
 
 save = 1  # 判断是否是非法跳出0，或是刷题结束2
 tl = ["（单选题）", "（多选题）", "（判断题 T or F）"]
@@ -401,8 +433,16 @@ while 1:
         save = 0
         break
     print("第{ii}题  ".format(ii=i + 1), end="")
-    print("( 题库: {pathh} )".format(pathh=path))
+    print("( 题库: {pathh} ".format(pathh=path), end="")
+    if randomChoice:
+        print("随机选项顺序: ON )")
+    else:
+        print("随机选项顺序: OFF )")
     if questionMap[i]['questionMode'] <= 2:
+        if randomChoice:
+            questionMap[i]['rightAns'], questionMap[i]['choice'] = \
+                randomChange(questionMap[i]['rightAns'], questionMap[i]['choice'])
+
         print(tl[questionMap[i]['questionMode'] - 1], end="")
         print(questionMap[i]['question'])
         choices = questionMap[i]['choice']
@@ -416,12 +456,12 @@ while 1:
             break
         ans = strreplace(ans, len(questionMap[i]['choice']))
         if ans == questionMap[i]['rightAns']:
-            print("right!!")
+            print("\033[1;32mright!!\033[0m")
             rightIndex += 1
             isansmq[i] = 1
             combo += 1
         else:
-            print("wrong")
+            print("\033[1;31mwrong!\033[0m")
             combo = 0
 
     elif questionMap[i]['questionMode'] == 3:
@@ -444,7 +484,7 @@ while 1:
     print("正确答案：" + lToStr(questionMap[i]['rightAns']))
     print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
     if combo != 0:
-        print("{combo} Combo !!".format(combo=combo))
+        print("\033[1;33m{combo} Combo !!\033[0m".format(combo=combo))
     print()
 
 if save == 1:  # 用户选择保存
@@ -457,11 +497,12 @@ if save == 1:  # 用户选择保存
                     'rightIndex': rightIndex,
                     'i': i,
                     'index': i + 1,
-                    'isansmq': isansmq,
                     'mode': mode,
                     'x': x,
                     'combo': combo,
-                    'updateCheck': updateCheck}
+                    'updateCheck': updateCheck,
+                    'randomChoice': randomChoice,
+                    'isansmq': isansmq}
             f.write(json.dumps(data))
 else:
     if save == 2:  # 刷题结束时
@@ -471,7 +512,11 @@ else:
         with open("Report.txt", 'a') as f:  # 保存记录
             report = "\n"
             report += str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "   mode {modee}\n".format(modee=mode)
-            report += "( 题库: {pathh} )  ".format(pathh=path)
+            report += "( 题库: {pathh}  ".format(pathh=path)
+            if randomChoice:
+                report += "随机选项顺序: ON ) "
+            else:
+                report += "随机选项顺序:OFF ) "
             report += "正确率：{x}%  {rights}/{anss}  ".format(x=tmp, anss=ansIndex, rights=rightIndex)
             report += "\n"
             f.write(report)
