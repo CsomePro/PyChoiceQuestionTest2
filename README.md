@@ -2,6 +2,14 @@
 
 ### 下载
 
+version 2.3
+
+直接下载zip  [点击下载](https://github.com/CsomePro/PyChoiceQuestionTest2/archive/master.zip)
+
+仅需配配置Python3运行环境即可
+
+version 2.2.2
+
 Windows不需配置Python3环境，直接下载release版本即可，解压后双击打开即可
 
 非Windows直接下载完整ZIP（Linux自带Python，MacOS需要配置Python环境），双击`main02.py`即可使用
@@ -13,7 +21,9 @@ Windows不需配置Python3环境，直接下载release版本即可
 参考此文配置Python3环境
 
 [Python3 环境搭建](https://www.runoob.com/python3/python3-install.html)
-### 安装python-docx库
+
+### 安装python-docx库（main02.py可自动安装）
+
 配置完Python3环境后
 
 在Windows命令提示符中输入下列代码，由于安装python-docx库
@@ -22,6 +32,7 @@ Windows不需配置Python3环境，直接下载release版本即可
 `pip install python-docx`
 
 ### 使用说明
+
 version 2  `docxx/main02.py` （推荐）
 
 使用说明：直接双击打开,按提示操作
@@ -30,19 +41,27 @@ version 2  `docxx/main02.py` （推荐）
 
 效果展示：
 ``` python
-Initializing...
+Do you want to load your data(y/n):n
+Do you want to change Question bank(y/n):y
 Enter your Question bank filename or file path:js01.docx
+
 1.you choose the question's index
 2.auto random question's index
 3.one by one test from x to end
-3
-input x(1-100):4
-第4题
-4、我国《兵役法》规定：预备役人员必须按照规定参加军事训练，随时准备（  ），保卫祖国。
-A、执行急难险重任务 B、参军参战 C、建设祖国 D、执行战斗任务
-
-answer(input 'quit' to quit):quit
-Do you want to save(y/n)y
+mode:3
+input x(1-100):1
+是否开启随机选项顺序？(y/n)y
+第1题  ( 题库: js01.docx 随机选项顺序: ON )
+（单选题）1、 人们解放军的军衔上出现两杠三星的是（    ）。
+A、大校
+B、上尉 
+C、上校 
+D、上将 
+answer(input 'q' to quit):3
+right!!
+正确答案：C
+正确率：100.0%  1/1 
+1 Combo !!
 ```
 
 version 1  `docxx/main01.py` （不推荐）
