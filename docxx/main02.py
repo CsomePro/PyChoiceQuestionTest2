@@ -47,6 +47,7 @@ def deletefile(file, flag):
 
 
 def update_file(downloadUrl, objectName, targetFile):
+    # ErrorCode = 0
     mainFile = objectName + "-master/doxx/" + targetFile
     try:
         import zipfile
@@ -75,10 +76,11 @@ def update_file(downloadUrl, objectName, targetFile):
     except:
         # zip_file.close()
         print("更新失败，请稍后再试。")
-        deletefile('tmp.zip', 0)
-        deletefile(mainFile, 0)
-        deletefile(objectName + "-master/doxx", 1)
-        deletefile(objectName + "-master", 1)
+        os.system("pause")
+        # deletefile('tmp.zip', 0)
+        # deletefile(mainFile, 0)
+        # deletefile(objectName + "-master/doxx", 1)
+        # deletefile(objectName + "-master", 1)
         exit(-1)
 
 
