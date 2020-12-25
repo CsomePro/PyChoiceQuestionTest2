@@ -73,6 +73,7 @@ def update_file(downloadUrl, objectName, targetFile):
         print('更新成功！重启程序后生效')
 
     except:
+        # zipFile.close()
         print("更新失败，请稍后再试。")
         deletefile('tmp.zip', 0)
         deletefile(mainFile, 0)
@@ -209,8 +210,8 @@ def swap(A, a, b):
 def randomChange(ansList, choiceList):
     countTmp = 3
     while countTmp:
-        randomIndex1 = randint(0, len(choice) - 1)
-        randomIndex2 = randint(0, len(choice) - 1)
+        randomIndex1 = randint(0, len(choiceList) - 1)
+        randomIndex2 = randint(0, len(choiceList) - 1)
         if randomIndex1 == randomIndex2:
             continue
         swap(ansList, randomIndex1, randomIndex2)
