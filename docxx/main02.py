@@ -55,9 +55,9 @@ def update_file(downloadUrl, objectName, targetFile):
         with open('tmp.zip', 'wb') as f:
             f.write(requests.get(downloadUrl).content)
         # 解压zip文件
-        zipFile = zipfile.ZipFile('tmp.zip')
-        zipFile.extract(mainFile)
-        zipFile.close()
+        zip_file = zipfile.ZipFile('tmp.zip')
+        zip_file.extract(mainFile)
+        zip_file.close()
 
         # 复制文件
         print('正在合并文件，请不要关闭窗口...')
@@ -73,7 +73,7 @@ def update_file(downloadUrl, objectName, targetFile):
         print('更新成功！重启程序后生效')
 
     except:
-        # zipFile.close()
+        # zip_file.close()
         print("更新失败，请稍后再试。")
         deletefile('tmp.zip', 0)
         deletefile(mainFile, 0)
@@ -85,7 +85,7 @@ def update_file(downloadUrl, objectName, targetFile):
 def update_this():
     print("检查更新中...")
     url = 'https://github.com/CsomePro/PyChoiceQuestionTest2/archive/master.zip'
-    objectname = 'TestTheAutoUpdate-master'
+    objectname = 'PyChoiceQuestionTest2'
     targetfile = 'main02.py'
     api = 'https://api.github.com/repos/CsomePro/PyChoiceQuestionTest2'
     allInfo = requests.get(api).json()
