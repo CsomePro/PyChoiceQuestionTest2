@@ -69,7 +69,7 @@ def update_file(downloadUrl, objectName, targetFile):
         # 删除文件
         os.remove('tmp.zip')
         os.remove(mainFile)
-        os.rmdir(objectName + "-master/doxx")
+        os.rmdir(objectName + "-master/docxx")
         os.rmdir(objectName + "-master")
         print('更新成功！重启程序后生效')
 
