@@ -48,7 +48,7 @@ def deletefile(file, flag):
 
 def update_file(downloadUrl, objectName, targetFile):
     # ErrorCode = 0
-    mainFile = objectName + "-master/doxx/" + targetFile
+    mainFile = objectName + "-master/docxx/" + targetFile
     try:
         import zipfile
         # 下载zip文件
