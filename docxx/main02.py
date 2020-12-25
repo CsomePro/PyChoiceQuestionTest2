@@ -77,10 +77,10 @@ def update_file(downloadUrl, objectName, targetFile):
         # zip_file.close()
         print("更新失败，请稍后再试。")
         os.system("pause")
-        # deletefile('tmp.zip', 0)
-        # deletefile(mainFile, 0)
-        # deletefile(objectName + "-master/doxx", 1)
-        # deletefile(objectName + "-master", 1)
+        deletefile('tmp.zip', 0)
+        deletefile(mainFile, 0)
+        deletefile(objectName + "-master/doxx", 1)
+        deletefile(objectName + "-master", 1)
         exit(-1)
 
 
