@@ -152,8 +152,10 @@ main02.py verison 2
 
 2020.12.25 version 2.3.1
 
-修复 version 2.3.0闪退问题
+修复 version 2.3.0更新闪退问题
 
 ### 常见问题
 
-1. 更新version 2.3出现闪退现象：将同目录下的`data.json`文件删除即可, 或更新至2.3.1
+1. 更新version 2.3出现闪退现象：将同目录下的`data.json`文件删除即可。
+
+2. version 2.3.0 更新出现闪退：手动下载最新zip文件，覆盖即可
