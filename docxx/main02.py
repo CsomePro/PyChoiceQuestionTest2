@@ -246,7 +246,7 @@ print("PyChoiceQuestionTest2\n"
 if not os.path.exists(r'data.json'):
     print("Initializing...")
     while 1:
-        path = input("Enter your Question bank filename or file path:")
+        path = input("请输入题库名或路径 -- Enter your Question bank filename or file path:")
         if os.path.exists(path):
             break
         else:
@@ -287,7 +287,7 @@ else:
         inp2 = input("Do you want to change Question bank(y/n):")
         if inp2 == 'y' or inp2 == 'Y':
             while 1:
-                path = input("Enter your Question bank filename or file path:")
+                path = input("请输入题库名或路径 -- Enter your Question bank filename or file path:")
                 if os.path.exists(path):
                     break
                 else:
