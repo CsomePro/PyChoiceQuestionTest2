@@ -466,6 +466,7 @@ while 1:
         else:
             print("\033[1;31mwrong!\033[0m")
             combo = 0
+        print("正确答案：" + lToStr(questionMap[i]['rightAns']))
 
     elif questionMap[i]['questionMode'] == 3:
         print(tl[questionMap[i]['questionMode'] - 1], end="")
@@ -473,18 +474,18 @@ while 1:
         ans = input("answer(input 'q' to quit):")
         if ans == "q":
             break
-        if ans == questionMap[i]['rightAns']:
-            print("right!!")
+        if ans.upper() == questionMap[i]['rightAns']:
+            print("\033[1;32mright!!\033[0m")
             rightIndex += 1
             isansmq[i] = 1
             combo += 1
         else:
-            print("wrong")
+            print("\033[1;31mwrong!\033[0m")
             combo = 0
+        print("正确答案：" + questionMap[i]['rightAns'])
 
     ansIndex += 1
     tmp = int(float(rightIndex / ansIndex) * 10000 + 0.5) / 100
-    print("正确答案：" + lToStr(questionMap[i]['rightAns']))
     print("正确率：{x}%  {rights}/{anss} ".format(x=tmp, anss=ansIndex, rights=rightIndex))
     if combo != 0:
         print("\033[1;33m{combo} Combo !!\033[0m".format(combo=combo))
