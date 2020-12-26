@@ -355,9 +355,9 @@ while ii < lenn:
 print()
 if init == 1:
     isansmq = [0 for i in range(len(questionMap))]  # need to save
-    print("1.you choose the question's index\n"
-          "2.auto random question's index\n"
-          "3.one by one test from x to end")
+    print("1.主动选择题目序号 -- you choose the question's index\n"
+          "2.自动随机题目序号 -- auto random question's index\n"
+          "3.自动顺序（从 x 开始）题目序号 -- one by one test from x to end")
     while 1:
         try:
             mode = int(input("mode:"))  # need to save
