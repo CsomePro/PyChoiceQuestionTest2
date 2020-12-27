@@ -263,8 +263,11 @@ else:
         updateCheck = data['updateCheck']
     # 更新检查
     if time.time() - updateCheck > 86400:
-        update_this()
-        updateCheck = time.time()
+        try:
+            update_this()
+            updateCheck = time.time()
+        except requests.exceptions.ConnectionError or requests.exceptions.ConnectTimeout:
+            print("当前无网络，请稍后再试。")
 
     inp1 = input("Do you want to load your data(y/n):")
     if inp1 == 'y' or inp1 == 'Y':
