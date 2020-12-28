@@ -8,15 +8,7 @@ version 2.3
 
 仅需配配置Python3运行环境即可
 
-version 2.2.2
-
-Windows不需配置Python3环境，直接下载release版本即可，解压后双击打开即可
-
-非Windows直接下载完整ZIP（Linux自带Python，MacOS需要配置Python环境），双击`main02.py`即可使用
-
 ### 运行环境Python3
-
-Windows不需配置Python3环境，直接下载release版本即可
 
 参考此文配置Python3环境
 
