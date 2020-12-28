@@ -4,6 +4,8 @@ import re
 import os
 import json
 
+
+
 # import尝试段
 count = 3
 while count:
@@ -30,11 +32,28 @@ while count:
         count -= 1
         continue
 
+while count:
+    try:
+        import colorama
+
+        count = 3
+        break
+    except ImportError:
+        print('colorama模块未安装,现在准备开始安装...')
+        os.system("pip install colorama -i https://pypi.tuna.tsinghua.edu.cn/simple")
+        count -= 1
+        continue
+
+
 if count != 3:
     print("加载失败，请稍后再试。")
+    os.system("pause")
     exit(-1)
 
 
+# --------------------------------------------------------------------------------- #
+# windows初始设置
+colorama.init(autoreset=True)
 # --------------------------------------------------------------------------------- #
 
 # 函数段
@@ -52,7 +71,7 @@ def update_file(downloadUrl, objectName, targetFile):
     try:
         import zipfile
         # 下载zip文件
-        print('正在下载文件，请不要关闭窗口...')
+        print(f'正在下载 {targetFile} 文件，请不要关闭窗口...')
         with open('tmp.zip', 'wb') as f:
             f.write(requests.get(downloadUrl).content)
         # 解压zip文件
@@ -81,6 +100,7 @@ def update_file(downloadUrl, objectName, targetFile):
         deletefile(mainFile, 0)
         deletefile(objectName + "-master/doxx", 1)
         deletefile(objectName + "-master", 1)
+        os.system("pause")
         exit(-1)
 
 
@@ -97,6 +117,7 @@ def update_this():
         inp3 = input("检测到最新版，是否更新?(y/n)")
         if inp3 == 'y' or inp3 == 'Y':
             update_file(url, objectname, targetfile)
+
             return 1
         else:
             return 0
@@ -533,7 +554,6 @@ else:
         f.write(json.dumps(data))
 
 os.system("pause")
-###
 '''
 Hi，这里是CSOME，很高兴你能下载我的项目
 这个项目是我第一个公开的开源项目，有不足之处请谅解
