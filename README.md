@@ -151,7 +151,7 @@ main02.py verison 2
 
 修复 判断题判题BUG
 
-2020.12.26 version 2.3.3 ---
+2020.12.28 version 2.3.3 ---
 
 修复 Windows平台下颜色显示异常的BUG
 
