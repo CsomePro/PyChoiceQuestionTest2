@@ -160,3 +160,5 @@ main02.py verison 2
 1. 更新version 2.3出现闪退现象：将同目录下的`data.json`文件删除即可。
 
 2. version 2.3.0 更新出现闪退：手动下载最新zip文件，覆盖即可
+
+3. Windows平台下颜色显示异常的BUG：更新至version 2.3.3
