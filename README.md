@@ -151,6 +151,10 @@ main02.py verison 2
 
 修复 判断题判题BUG
 
+2020.12.26 version 2.3.3 ---
+
+修复 Windows平台下颜色显示异常的BUG
+
 ### 常见问题
 
 1. 更新version 2.3出现闪退现象：将同目录下的`data.json`文件删除即可。
