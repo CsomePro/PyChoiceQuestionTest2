@@ -92,7 +92,7 @@ def update_file(downloadUrl, objectName, targetFile):
 
     except:
         # zip_file.close()
-        print("更新失败，请稍后再试。")
+        print("{targetFilee} 更新失败，请稍后再试。".format(targetFilee=targetFile))
         os.system("pause")
         deletefile('tmp.zip', 0)
         deletefile(mainFile, 0)
@@ -115,9 +115,12 @@ def update_this():
         inp3 = input("检测到最新版，是否更新?(y/n)")
         if inp3 == 'y' or inp3 == 'Y':
             update_file(url, objectname, targetfile)
+            print('main02.py 更新成功！')
             update_file(url, objectname, "js01.docx")
+            print('js01.docx 更新成功！')
             update_file(url, objectname, "js02.docx")
-            print('更新成功！重启程序后生效')
+            print('js02.docx 更新成功！')
+            print("重启程序后生效")
             return 1
         else:
             return 0
