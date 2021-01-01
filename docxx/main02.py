@@ -4,8 +4,6 @@ import re
 import os
 import json
 
-
-
 # import尝试段
 count = 3
 while count:
@@ -44,16 +42,16 @@ while count:
         count -= 1
         continue
 
-
 if count != 3:
     print("加载失败，请稍后再试。")
     os.system("pause")
     exit(-1)
 
-
 # --------------------------------------------------------------------------------- #
 # windows初始设置
 colorama.init(autoreset=True)
+
+
 # --------------------------------------------------------------------------------- #
 
 # 函数段
@@ -71,7 +69,7 @@ def update_file(downloadUrl, objectName, targetFile):
     try:
         import zipfile
         # 下载zip文件
-        print(f'正在下载 {targetFile} 文件，请不要关闭窗口...')
+        print('正在下载 {targetFilee} 文件，请不要关闭窗口...'.format(targetFilee=targetFile))
         with open('tmp.zip', 'wb') as f:
             f.write(requests.get(downloadUrl).content)
         # 解压zip文件
@@ -90,7 +88,7 @@ def update_file(downloadUrl, objectName, targetFile):
         os.remove(mainFile)
         os.rmdir(objectName + "-master/docxx")
         os.rmdir(objectName + "-master")
-        print('更新成功！重启程序后生效')
+        # print('更新成功！重启程序后生效')
 
     except:
         # zip_file.close()
@@ -117,7 +115,9 @@ def update_this():
         inp3 = input("检测到最新版，是否更新?(y/n)")
         if inp3 == 'y' or inp3 == 'Y':
             update_file(url, objectname, targetfile)
-
+            update_file(url, objectname, "js01.docx")
+            update_file(url, objectname, "js02.docx")
+            print('更新成功！重启程序后生效')
             return 1
         else:
             return 0
