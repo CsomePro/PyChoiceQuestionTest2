@@ -260,7 +260,7 @@ isansmq = []  # need to save
 mode = 1  # need to save
 x = 1  # need to save
 combo = 0  # need to save
-version = '2.3.3'  # need to save
+version = '2.3.4'  # need to save
 randomChoice = True  # need to save
 
 print("PyChoiceQuestionTest2\n"
