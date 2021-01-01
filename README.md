@@ -155,7 +155,7 @@ main02.py verison 2
 
 修复 Windows平台下颜色显示异常的BUG
 
-2020.12.28 version 2.3.4 ---
+2021.01.01 version 2.3.4 ---
 
 添加 主动更新js01.docx和js02.docx两个默认题库
 
