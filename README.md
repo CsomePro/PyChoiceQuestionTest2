@@ -155,6 +155,10 @@ main02.py verison 2
 
 修复 Windows平台下颜色显示异常的BUG
 
+2020.12.28 version 2.3.4 ---
+
+添加 主动更新js01.docx和js02.docx两个默认题库
+
 ### 常见问题
 
 1. 更新version 2.3出现闪退现象：将同目录下的`data.json`文件删除即可。
